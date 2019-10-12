@@ -1,18 +1,22 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Introduction.Models
 {
-    public class NorthwindContext : DbContext
+    public partial class NorthwindContext : DbContext
     {
-        public NorthwindContext(DbContextOptions<NorthwindContext> options) : base(options)
+        public NorthwindContext()
         {
-
         }
 
-        public DbSet<Category> categories { get; set; }
+        public NorthwindContext(DbContextOptions<NorthwindContext> options)
+            : base(options)
+        {
+        }
+
+        public virtual DbSet<Categories> Categories { get; set; }
+        public virtual DbSet<Products> Products { get; set; }
+        public virtual DbSet<Suppliers> Suppliers { get; set; }
     }
 }

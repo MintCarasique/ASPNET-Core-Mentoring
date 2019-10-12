@@ -4,23 +4,26 @@ using System.Linq;
 using System.Threading.Tasks;
 using Introduction.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Introduction.Controllers
 {
-    public class CategoriesController : Controller
+    public class ProductsController : Controller
     {
         private readonly NorthwindContext _dbContext;
 
-        public CategoriesController(NorthwindContext context)
+        public ProductsController(NorthwindContext context)
         {
             _dbContext = context;
         }
 
         public IActionResult Index()
         {
-            var categoriesList = _dbContext.Categories.ToList();
-
-            return View(categoriesList);
+            var products = _dbContext.Products
+                .Include(product => product.Category)
+                .Include(product => product.Supplier)
+                .ToList();
+            return View(products);
         }
     }
 }

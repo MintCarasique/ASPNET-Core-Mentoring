@@ -1,0 +1,59 @@
+﻿@model List<Products>
+<h2>List of products</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Supplier</th>
+            <th>Category</th>
+            <th>Quantity per unit</th>
+            <th>Unit Price</th>
+            <th>Units in stock</th>
+            <th>Units on order</th>
+            <th>Reorder level</th>
+            <th>Is discontinued</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+        <tr>
+            <td>
+                @product.ProductName
+            </td>
+            <td>
+                @product.Supplier.CompanyName
+            </td>
+            <td>
+                @product.Category.CategoryName
+            </td>
+            <td>
+                @product.QuantityPerUnit
+            </td>
+            <td>
+                @product.UnitPrice
+            </td>
+            <td>
+                @product.UnitsInStock
+            </td>
+            <td>
+                @product.UnitsOnOrder
+            </td>
+            <td>
+                @product.ReorderLevel
+            </td>
+            <td>
+                @if (product.Discontinued)
+                {
+                    <p>YES</p>
+                }
+                else 
+                {
+                    <p>NO</p>
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
