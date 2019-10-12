@@ -4,4 +4,25 @@
 }
 
 <h2>List of categories</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Category Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model)
+        {
+        <tr>
+            <td>
+                @category.CategoryName
+            </td>
+            <td>
+                @category.Description
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
 
