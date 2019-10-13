@@ -10,6 +10,6 @@ namespace Introduction.Services
     {
         List<Categories> GetAllCategories();
 
-        Categories GetCategory();
+        Categories GetCategory(int id);
     }
 }

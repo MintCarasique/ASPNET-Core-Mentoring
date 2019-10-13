@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewData["Title"] = "Category Edit";
+}
+
+@model Categories
+
+<h2>@Model.CategoryName Edit</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label for="categoryName">Category Name</label>
+        <input class="form-control" asp-for="CategoryName" id="categoryName">
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea class="form-control" id="description" asp-for="Description"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

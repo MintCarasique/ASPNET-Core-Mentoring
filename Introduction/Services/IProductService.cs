@@ -10,6 +10,6 @@ namespace Introduction.Services
     {
         List<Products> GetAllProducts();
 
-        Products GetProduct();
+        Products GetProduct(int id);
     }
 }

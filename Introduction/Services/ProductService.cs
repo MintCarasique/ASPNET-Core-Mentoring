@@ -22,7 +22,7 @@ namespace Introduction.Services
                 .ToList();
         }
 
-        public Products GetProduct()
+        public Products GetProduct(int id)
         {
             throw new NotImplementedException();
         }

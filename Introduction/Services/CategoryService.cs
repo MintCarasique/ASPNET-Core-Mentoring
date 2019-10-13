@@ -20,9 +20,9 @@ namespace Introduction.Services
             return _dbContext.Categories.ToList();
         }
 
-        public Categories GetCategory()
+        public Categories GetCategory(int id)
         {
-            throw new NotImplementedException();
+            return _dbContext.Categories.FirstOrDefault(_ => _.CategoryID == id);
         }
     }
 }

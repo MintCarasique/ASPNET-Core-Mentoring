@@ -21,5 +21,16 @@ namespace Introduction.Controllers
         {
             return View(_categoryService.GetAllCategories());
         }
+
+        public IActionResult Edit(int id) 
+        {
+            return View(_categoryService.GetCategory(id));
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Categories categories)
+        {
+            return View("Index", _categoryService.GetAllCategories());
+        }
     }
 }
