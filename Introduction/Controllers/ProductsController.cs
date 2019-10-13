@@ -64,7 +64,7 @@ namespace Introduction.Controllers
         {
             if (ModelState.IsValid)
             {
-                //_productService.UpdateProduct(product);
+                _productService.UpdateProduct(product);
             }
             
             return RedirectToAction("Index");
