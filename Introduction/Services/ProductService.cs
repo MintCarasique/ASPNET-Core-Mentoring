@@ -24,7 +24,7 @@ namespace Introduction.Services
 
         public Products GetProduct(int id)
         {
-            throw new NotImplementedException();
+            return _dbContext.Products.FirstOrDefault(_ => _.ProductID == id);
         }
     }
 }

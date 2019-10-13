@@ -29,7 +29,7 @@ namespace Introduction.Controllers
             {
                 return RedirectToAction("Index");
             }
-            return View(_categoryService.GetCategory(id));
+            return View(model);
         }
 
         [HttpPost]

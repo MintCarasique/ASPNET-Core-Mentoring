@@ -16,5 +16,15 @@ namespace Introduction.Controllers
         {
             return View(_productService.GetAllProducts());
         }
+
+        public IActionResult Edit(int id)
+        {
+            var model = _productService.GetProduct(id);
+            if (model == null) 
+            {
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
     }
 }
