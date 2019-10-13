@@ -31,6 +31,7 @@ namespace Introduction
             services.AddDbContext<NorthwindContext>(options => options.UseSqlServer(connectionString));
             services.AddMvc();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IProductService, ProductService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

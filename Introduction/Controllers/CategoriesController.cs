@@ -12,9 +12,9 @@ namespace Introduction.Controllers
     {
         private readonly ICategoryService _categoryService;
 
-        public CategoriesController(ICategoryService categoriesService)
+        public CategoriesController(ICategoryService categoryService)
         {
-            _categoryService = categoriesService;
+            _categoryService = categoryService;
         }
 
         public IActionResult Index()
