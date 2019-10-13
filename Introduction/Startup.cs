@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Introduction.Models;
+using Introduction.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -29,6 +30,7 @@ namespace Introduction
             var connectionString = Configuration.GetConnectionString("NorthwndConf");
             services.AddDbContext<NorthwindContext>(options => options.UseSqlServer(connectionString));
             services.AddMvc();
+            services.AddScoped<ICategoryService, CategoryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

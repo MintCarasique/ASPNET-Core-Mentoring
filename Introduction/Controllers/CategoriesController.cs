@@ -3,24 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Introduction.Models;
+using Introduction.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Introduction.Controllers
 {
     public class CategoriesController : Controller
     {
-        private readonly NorthwindContext _dbContext;
+        private readonly ICategoryService _categoryService;
 
-        public CategoriesController(NorthwindContext context)
+        public CategoriesController(ICategoryService categoriesService)
         {
-            _dbContext = context;
+            _categoryService = categoriesService;
         }
 
         public IActionResult Index()
         {
-            var categoriesList = _dbContext.Categories.ToList();
-
-            return View(categoriesList);
+            return View(_categoryService.GetAllCategories());
         }
     }
 }
