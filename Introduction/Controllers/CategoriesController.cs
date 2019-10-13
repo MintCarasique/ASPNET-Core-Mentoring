@@ -41,5 +41,10 @@ namespace Introduction.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }

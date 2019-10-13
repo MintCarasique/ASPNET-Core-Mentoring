@@ -13,7 +13,11 @@ namespace Introduction.Models
 
         [Key]
         public int CategoryID { get; set; }
+
+        [Required]
         public string CategoryName { get; set; }
+
+        [Required]
         public string Description { get; set; }
         public byte[] Picture { get; set; }
 
