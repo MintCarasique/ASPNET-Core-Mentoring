@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace Introduction.Services
 {
-    public interface IProductService
+    public interface ISupplierService
     {
-        List<Products> GetAllProducts();
-
-        Products GetProduct(int id);
-
-        void UpdateProduct(Products product);
+        List<Suppliers> GetAllSuppliers();
     }
 }

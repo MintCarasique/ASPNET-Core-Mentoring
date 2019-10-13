@@ -1,5 +1,8 @@
-﻿using Introduction.Services;
+﻿using Introduction.Models;
+using Introduction.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
 
 namespace Introduction.Controllers
 {
@@ -7,9 +10,15 @@ namespace Introduction.Controllers
     {
         private readonly IProductService _productService;
 
-        public ProductsController(IProductService productService)
+        private readonly ICategoryService _categoryService;
+
+        private readonly ISupplierService _supplierService;
+
+        public ProductsController(IProductService productService, ICategoryService categoryService, ISupplierService supplierService)
         {
             _productService = productService;
+            _categoryService = categoryService;
+            _supplierService = supplierService;
         }
 
         public IActionResult Index()
@@ -24,7 +33,41 @@ namespace Introduction.Controllers
             {
                 return RedirectToAction("Index");
             }
+
+            List<SelectListItem> categoryListItems = _categoryService.GetAllCategories().ConvertAll(a => 
+            {
+                return new SelectListItem()
+                {
+                    Text = a.CategoryName,
+                    Value = a.CategoryID.ToString(),
+                    Selected = a.CategoryID == model.CategoryID ? true : false
+                };
+            });
+
+            List<SelectListItem> suppliersListItems = _supplierService.GetAllSuppliers().ConvertAll(a =>
+            {
+                return new SelectListItem()
+                {
+                    Text = a.CompanyName,
+                    Value = a.SupplierID.ToString(),
+                    Selected = a.SupplierID == model.SupplierID ? true : false
+                };
+            });
+
+            ViewBag.Categories = categoryListItems;
+            ViewBag.Suppliers = suppliersListItems;
             return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Products product)
+        {
+            if (ModelState.IsValid)
+            {
+                //_productService.UpdateProduct(product);
+            }
+            
+            return RedirectToAction("Index");
         }
     }
 }

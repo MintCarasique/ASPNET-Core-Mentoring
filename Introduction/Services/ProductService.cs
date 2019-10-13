@@ -26,5 +26,11 @@ namespace Introduction.Services
         {
             return _dbContext.Products.FirstOrDefault(_ => _.ProductID == id);
         }
+
+        public void UpdateProduct(Products product)
+        {
+            _dbContext.Attach(product).State = EntityState.Modified;
+            _dbContext.SaveChanges();
+        }
     }
 }
