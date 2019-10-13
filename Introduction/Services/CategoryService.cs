@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Introduction.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Introduction.Services
 {
@@ -23,6 +24,12 @@ namespace Introduction.Services
         public Categories GetCategory(int id)
         {
             return _dbContext.Categories.FirstOrDefault(_ => _.CategoryID == id);
+        }
+
+        public void UpdateCategory(Categories category)
+        {
+            _dbContext.Attach(category).State = EntityState.Modified;
+            _dbContext.SaveChanges();
         }
     }
 }

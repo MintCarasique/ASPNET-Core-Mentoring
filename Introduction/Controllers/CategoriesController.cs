@@ -24,13 +24,22 @@ namespace Introduction.Controllers
 
         public IActionResult Edit(int id) 
         {
+            var model = _categoryService.GetCategory(id);
+            if (model == null)
+            {
+                return RedirectToAction("Index");
+            }
             return View(_categoryService.GetCategory(id));
         }
 
         [HttpPost]
         public IActionResult Edit(Categories categories)
         {
-            return View("Index", _categoryService.GetAllCategories());
+            if (ModelState.IsValid)
+            {
+                _categoryService.UpdateCategory(categories);
+            }
+            return RedirectToAction("Index");
         }
     }
 }

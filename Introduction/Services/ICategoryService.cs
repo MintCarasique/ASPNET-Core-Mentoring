@@ -11,5 +11,7 @@ namespace Introduction.Services
         List<Categories> GetAllCategories();
 
         Categories GetCategory(int id);
+
+        void UpdateCategory(Categories category);
     }
 }
