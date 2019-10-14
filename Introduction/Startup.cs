@@ -49,12 +49,18 @@ namespace Introduction
             logger.LogInformation("Application started successfully");
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                //app.UseDeveloperExceptionPage();
+                app.UseExceptionHandler("/Error/exceptionError");
+            }
+            else 
+            {
+               
             }
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseStatusCodePagesWithRedirects("/Error/HttpError");
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

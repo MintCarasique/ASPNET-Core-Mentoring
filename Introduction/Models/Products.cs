@@ -20,7 +20,6 @@ namespace Introduction.Models
         public int? CategoryID { get; set; }
 
         [Required]
-        [Range(0, 9999)]
         public string QuantityPerUnit { get; set; }
 
         [Range(0, 999999999)]

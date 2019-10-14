@@ -24,8 +24,18 @@ namespace Introduction.Services
 
         public void CreateProduct(Products product)
         {
-            _dbContext.Products.Add(product);
-            _dbContext.SaveChanges();
+            try
+            {
+                _logger.LogInformation("Adding new record to database");
+                _dbContext.Products.Add(product);
+                _dbContext.SaveChanges();
+                _logger.LogInformation("Record added to database successfully");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error adding new record to database! {ex.Message}");
+                throw;
+            }
         }
 
         public List<Products> GetAllProducts()
@@ -48,16 +58,16 @@ namespace Introduction.Services
         {
             if (IsValid(product))
             {
-                _logger.LogInformation("Adding record to database");
+                _logger.LogInformation("Updating record in database");
                 try
                 {
                     _dbContext.Attach(product).State = EntityState.Modified;
                     _dbContext.SaveChanges();
-                    _logger.LogInformation("Record added to database successfully");
+                    _logger.LogInformation("Record updated successfully");
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError($"Error adding new record to database: {ex.Message}");
+                    _logger.LogError($"Error updating record in database: {ex.Message}");
                 }
             }
             
@@ -77,7 +87,7 @@ namespace Introduction.Services
                 return false;
             if (product.ReorderLevel < 0)
                 return false;
-            if (Convert.ToInt32(product.QuantityPerUnit) < 0)
+            if (product.QuantityPerUnit == null)
                 return false;
             return true;
         }
