@@ -13,5 +13,7 @@ namespace Introduction.Services
         Categories GetCategory(int id);
 
         void UpdateCategory(Categories category);
+
+        void CreateCategory(Categories category);
     }
 }

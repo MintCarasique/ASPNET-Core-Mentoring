@@ -15,9 +15,11 @@ namespace Introduction.Models
         public int CategoryID { get; set; }
 
         [Required]
+        [StringLength(100)]
         public string CategoryName { get; set; }
 
         [Required]
+        [StringLength(500)]
         public string Description { get; set; }
         public byte[] Picture { get; set; }
 

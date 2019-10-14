@@ -16,6 +16,12 @@ namespace Introduction.Services
             _dbContext = context;
         }
 
+        public void CreateCategory(Categories category)
+        {
+            _dbContext.Categories.Add(category);
+            _dbContext.SaveChanges();
+        }
+
         public List<Categories> GetAllCategories()
         {
             return _dbContext.Categories.ToList();

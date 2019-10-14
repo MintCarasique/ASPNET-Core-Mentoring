@@ -22,6 +22,7 @@ namespace Introduction.Controllers
             return View(_categoryService.GetAllCategories());
         }
 
+        [HttpGet]
         public IActionResult Edit(int id) 
         {
             var model = _categoryService.GetCategory(id);
@@ -42,9 +43,21 @@ namespace Introduction.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Categories category) 
+        {
+            if (ModelState.IsValid)
+            {
+                _categoryService.CreateCategory(category);
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }
