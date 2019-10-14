@@ -2,6 +2,7 @@
 using Introduction.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 
 namespace Introduction.Controllers
@@ -14,7 +15,10 @@ namespace Introduction.Controllers
 
         private readonly ISupplierService _supplierService;
 
-        public ProductsController(IProductService productService, ICategoryService categoryService, ISupplierService supplierService)
+        public ProductsController(
+            IProductService productService, 
+            ICategoryService categoryService, 
+            ISupplierService supplierService)
         {
             _productService = productService;
             _categoryService = categoryService;

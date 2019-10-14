@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Introduction.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace Introduction.Services
 {
@@ -10,9 +11,12 @@ namespace Introduction.Services
     {
         private readonly NorthwindContext _dbContext;
 
-        public ProductService(NorthwindContext context)
+        private readonly IConfiguration _configuration;
+
+        public ProductService(NorthwindContext context, IConfiguration configuration)
         {
             _dbContext = context;
+            _configuration = configuration;
         }
 
         public void CreateProduct(Products product)
@@ -23,7 +27,9 @@ namespace Introduction.Services
 
         public List<Products> GetAllProducts()
         {
-            return _dbContext.Products
+            int maxAmount = Convert.ToInt32(_configuration.GetSection("ProductParams").GetSection("MaxAmountPerRequest").Value);
+
+            return _dbContext.Products.Take(maxAmount == 0 ? _dbContext.Products.Count() : maxAmount)
                 .Include(product => product.Category)
                 .Include(product => product.Supplier)
                 .ToList();
