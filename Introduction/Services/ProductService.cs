@@ -24,17 +24,24 @@ namespace Introduction.Services
 
         public void CreateProduct(Products product)
         {
+
             try
             {
-                _logger.LogInformation("Adding new record to database");
-                _dbContext.Products.Add(product);
-                _dbContext.SaveChanges();
-                _logger.LogInformation("Record added to database successfully");
+                if (IsValid(product))
+                {
+                    _logger.LogInformation("Adding new record to database");
+                    _dbContext.Products.Add(product);
+                    _dbContext.SaveChanges();
+                    _logger.LogInformation("Record added to database successfully");
+                }
+                else 
+                {
+                    _logger.LogError("Error adding new product to database. Model is invalid.");
+                }
             }
             catch (Exception ex)
             {
                 _logger.LogError($"Error adding new record to database! {ex.Message}");
-                throw;
             }
         }
 
@@ -70,11 +77,17 @@ namespace Introduction.Services
                     _logger.LogError($"Error updating record in database: {ex.Message}");
                 }
             }
+            else
+            {
+                _logger.LogError("Error updating product in database. Model is invalid.");
+            }
             
         }
 
         private bool IsValid(Products product) 
         {
+            if (product == null)
+                return false;
             if (product.CategoryID == null)
                 return false;
             if (product.SupplierID == null)
