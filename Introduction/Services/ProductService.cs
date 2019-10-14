@@ -14,13 +14,12 @@ namespace Introduction.Services
 
         private readonly IConfiguration _configuration;
 
-        private readonly ILogger<ProductService> _logger;
+        private readonly ILogger _logger = Log.Log.CreateLogger<ProductService>();
 
-        public ProductService(NorthwindContext context, IConfiguration configuration, ILogger<ProductService> logger)
+        public ProductService(NorthwindContext context, IConfiguration configuration)
         {
             _dbContext = context;
             _configuration = configuration;
-            _logger = logger;
         }
 
         public void CreateProduct(Products product)
@@ -31,8 +30,9 @@ namespace Introduction.Services
 
         public List<Products> GetAllProducts()
         {
+            _logger.LogInformation("Getting all products from database");
             int maxAmount = Convert.ToInt32(_configuration.GetSection("ProductParams").GetSection("MaxAmountPerRequest").Value);
-
+            _logger.LogInformation($"Max amount of products written in configuration: {maxAmount.ToString()}");
             return _dbContext.Products.Take(maxAmount == 0 ? _dbContext.Products.Count() : maxAmount)
                 .Include(product => product.Category)
                 .Include(product => product.Supplier)

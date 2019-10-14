@@ -3,6 +3,7 @@ using Introduction.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 
 namespace Introduction.Controllers
@@ -15,18 +16,23 @@ namespace Introduction.Controllers
 
         private readonly ISupplierService _supplierService;
 
+        private readonly ILogger<ProductsController> _logger;
+
         public ProductsController(
             IProductService productService, 
             ICategoryService categoryService, 
-            ISupplierService supplierService)
+            ISupplierService supplierService,
+            ILogger<ProductsController> logger)
         {
             _productService = productService;
             _categoryService = categoryService;
             _supplierService = supplierService;
+            _logger = logger;
         }
 
         public IActionResult Index()
         {
+            _logger.LogInformation("log test");
             return View(_productService.GetAllProducts());
         }
 

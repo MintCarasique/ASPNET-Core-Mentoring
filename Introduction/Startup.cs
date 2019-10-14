@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Introduction.Models;
+using Introduction.Log;
 using Introduction.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,8 +38,14 @@ namespace Introduction
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILogger<Startup> logger)
+        public void Configure(
+            IApplicationBuilder app, 
+            IHostingEnvironment env, 
+            ILogger<Startup> logger, 
+            ILoggerFactory loggerFactory)
         {
+            Log.Log.LoggerFactory = loggerFactory;
+            Log.Log.LoggerFactory.AddConsole();
             logger.LogInformation("Application started successfully");
             if (env.IsDevelopment())
             {
