@@ -10,6 +10,7 @@ namespace Introduction.Models
         public int ProductID { get; set; }
 
         [Required]
+        [StringLength(50)]
         public string ProductName { get; set; }
 
         [Required]
@@ -19,18 +20,22 @@ namespace Introduction.Models
         public int? CategoryID { get; set; }
 
         [Required]
+        [Range(0, 9999)]
         public string QuantityPerUnit { get; set; }
 
-        [Required]
+        [Range(0, 999999999)]
         public decimal? UnitPrice { get; set; }
 
         [Required]
+        [Range(0, 999999)]
         public short? UnitsInStock { get; set; }
 
         [Required]
+        [Range(0, 100)]
         public short? UnitsOnOrder { get; set; }
 
         [Required]
+        [Range(0, short.MaxValue)]
         public short? ReorderLevel { get; set; }
 
         public bool Discontinued { get; set; }

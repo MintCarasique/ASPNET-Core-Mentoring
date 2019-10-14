@@ -26,6 +26,7 @@ namespace Introduction.Controllers
             return View(_productService.GetAllProducts());
         }
 
+        [HttpGet]
         public IActionResult Edit(int id)
         {
             var model = _productService.GetProduct(id);
@@ -67,6 +68,46 @@ namespace Introduction.Controllers
                 _productService.UpdateProduct(product);
             }
             
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            List<SelectListItem> categoryListItems = _categoryService.GetAllCategories().ConvertAll(a =>
+            {
+                return new SelectListItem()
+                {
+                    Text = a.CategoryName,
+                    Value = a.CategoryID.ToString(),
+                    Selected = false
+                };
+            });
+
+            List<SelectListItem> suppliersListItems = _supplierService.GetAllSuppliers().ConvertAll(a =>
+            {
+                return new SelectListItem()
+                {
+                    Text = a.CompanyName,
+                    Value = a.SupplierID.ToString(),
+                    Selected = false
+                };
+            });
+
+            ViewBag.Categories = categoryListItems;
+            ViewBag.Suppliers = suppliersListItems;
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Products product)
+        {
+            if (ModelState.IsValid)
+            {
+                _productService.CreateProduct(product);
+            }
+
             return RedirectToAction("Index");
         }
     }

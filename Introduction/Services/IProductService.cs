@@ -13,5 +13,7 @@ namespace Introduction.Services
         Products GetProduct(int id);
 
         void UpdateProduct(Products product);
+
+        void CreateProduct(Products product);
     }
 }

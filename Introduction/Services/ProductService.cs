@@ -14,6 +14,13 @@ namespace Introduction.Services
         {
             _dbContext = context;
         }
+
+        public void CreateProduct(Products product)
+        {
+            _dbContext.Products.Add(product);
+            _dbContext.SaveChanges();
+        }
+
         public List<Products> GetAllProducts()
         {
             return _dbContext.Products
