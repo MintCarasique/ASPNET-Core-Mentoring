@@ -14,12 +14,13 @@ namespace Introduction.Services
 
         private readonly IConfiguration _configuration;
 
-        private readonly ILogger _logger = Log.Log.CreateLogger<ProductService>();
+        private readonly ILogger _logger;
 
-        public ProductService(NorthwindContext context, IConfiguration configuration)
+        public ProductService(NorthwindContext context, IConfiguration configuration, ILogger<ProductService> logger)
         {
             _dbContext = context;
             _configuration = configuration;
+            _logger = logger;
         }
 
         public void CreateProduct(Products product)

@@ -12,11 +12,12 @@ namespace Introduction.Services
     {
         private readonly NorthwindContext _dbContext;
 
-        private readonly ILogger _logger = Log.Log.CreateLogger<ProductService>();
+        private readonly ILogger _logger;
 
-        public CategoryService(NorthwindContext context)
+        public CategoryService(NorthwindContext context, ILogger<CategoryService> logger)
         {
             _dbContext = context;
+            _logger = logger;
         }
 
         public void CreateCategory(Categories category)
@@ -43,6 +44,7 @@ namespace Introduction.Services
 
         public List<Categories> GetAllCategories()
         {
+            _logger.LogInformation("Getting all categories from database");
             return _dbContext.Categories.ToList();
         }
 

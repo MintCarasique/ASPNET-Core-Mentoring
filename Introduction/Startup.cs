@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Introduction.Models;
-using Introduction.Log;
 using Introduction.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -41,11 +40,8 @@ namespace Introduction
         public void Configure(
             IApplicationBuilder app, 
             IHostingEnvironment env, 
-            ILogger<Startup> logger, 
-            ILoggerFactory loggerFactory)
+            ILogger<Startup> logger)
         {
-            Log.Log.LoggerFactory = loggerFactory;
-            Log.Log.LoggerFactory.AddConsole();
             logger.LogInformation("Application started successfully");
             if (env.IsDevelopment())
             {
