@@ -2,7 +2,6 @@
 using Introduction.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 
@@ -51,7 +50,7 @@ namespace Introduction.Controllers
                 {
                     Text = a.CategoryName,
                     Value = a.CategoryID.ToString(),
-                    Selected = a.CategoryID == model.CategoryID ? true : false
+                    Selected = a.CategoryID == model.CategoryID
                 };
             });
 
@@ -61,7 +60,7 @@ namespace Introduction.Controllers
                 {
                     Text = a.CompanyName,
                     Value = a.SupplierID.ToString(),
-                    Selected = a.SupplierID == model.SupplierID ? true : false
+                    Selected = a.SupplierID == model.SupplierID
                 };
             });
 
