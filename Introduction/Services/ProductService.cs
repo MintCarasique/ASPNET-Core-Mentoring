@@ -23,7 +23,7 @@ namespace Introduction.Services
             _logger = logger;
         }
 
-        public void CreateProduct(Products product)
+        public void CreateProduct(Product product)
         {
 
             try
@@ -46,7 +46,7 @@ namespace Introduction.Services
             }
         }
 
-        public List<Products> GetAllProducts()
+        public List<Product> GetAllProducts()
         {
             _logger.LogInformation("Getting all products from database");
             int maxAmount = Convert.ToInt32(_configuration.GetSection("ProductParams").GetSection("MaxAmountPerRequest").Value);
@@ -57,12 +57,12 @@ namespace Introduction.Services
                 .ToList();
         }
 
-        public Products GetProduct(int id)
+        public Product GetProduct(int id)
         {
             return _dbContext.Products.FirstOrDefault(_ => _.ProductID == id);
         }
 
-        public void UpdateProduct(Products product)
+        public void UpdateProduct(Product product)
         {
             if (IsValid(product))
             {
@@ -85,7 +85,7 @@ namespace Introduction.Services
             
         }
 
-        private bool IsValid(Products product) 
+        private bool IsValid(Product product) 
         {
             if (product == null)
                 return false;

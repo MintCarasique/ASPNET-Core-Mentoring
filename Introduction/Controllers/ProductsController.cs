@@ -71,7 +71,7 @@ namespace Introduction.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(Products product)
+        public IActionResult Edit(Product product)
         {
             if (ModelState.IsValid)
             {
@@ -111,7 +111,7 @@ namespace Introduction.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Products product)
+        public IActionResult Create(Product product)
         {
             if (ModelState.IsValid)
             {

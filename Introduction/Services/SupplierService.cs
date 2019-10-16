@@ -15,7 +15,7 @@ namespace Introduction.Services
             _dbContext = context;
         }
 
-        public List<Suppliers> GetAllSuppliers()
+        public List<Supplier> GetAllSuppliers()
         {
             return _dbContext.Suppliers.ToList();
         }

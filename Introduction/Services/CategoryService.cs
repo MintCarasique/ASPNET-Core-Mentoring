@@ -20,7 +20,7 @@ namespace Introduction.Services
             _logger = logger;
         }
 
-        public void CreateCategory(Categories category)
+        public void CreateCategory(Category category)
         {
             try
             {
@@ -42,18 +42,18 @@ namespace Introduction.Services
             }
         }
 
-        public List<Categories> GetAllCategories()
+        public List<Category> GetAllCategories()
         {
             _logger.LogInformation("Getting all categories from database");
             return _dbContext.Categories.ToList();
         }
 
-        public Categories GetCategory(int id)
+        public Category GetCategory(int id)
         {
             return _dbContext.Categories.FirstOrDefault(_ => _.CategoryID == id);
         }
 
-        public void UpdateCategory(Categories category)
+        public void UpdateCategory(Category category)
         {
             _logger.LogInformation("Updating category in database");
             try
@@ -76,7 +76,7 @@ namespace Introduction.Services
             
         }
 
-        private bool IsValid(Categories category) 
+        private bool IsValid(Category category) 
         {
             if (category == null)
                 return false;

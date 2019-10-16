@@ -8,6 +8,6 @@ namespace Introduction.Services
 {
     public interface ISupplierService
     {
-        List<Suppliers> GetAllSuppliers();
+        List<Supplier> GetAllSuppliers();
     }
 }

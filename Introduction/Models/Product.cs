@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Introduction.Models
 {
-    public partial class Products
+    public partial class Product
     {
         [Key]
         public int ProductID { get; set; }
@@ -39,7 +39,7 @@ namespace Introduction.Models
 
         public bool Discontinued { get; set; }
 
-        public Categories Category { get; set; }
-        public Suppliers Supplier { get; set; }
+        public Category Category { get; set; }
+        public Supplier Supplier { get; set; }
     }
 }

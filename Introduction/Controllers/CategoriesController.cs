@@ -34,7 +34,7 @@ namespace Introduction.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(Categories categories)
+        public IActionResult Edit(Category categories)
         {
             if (ModelState.IsValid)
             {
@@ -50,7 +50,7 @@ namespace Introduction.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Categories category) 
+        public IActionResult Create(Category category) 
         {
             if (ModelState.IsValid)
             {

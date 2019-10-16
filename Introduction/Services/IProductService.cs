@@ -8,12 +8,12 @@ namespace Introduction.Services
 {
     public interface IProductService
     {
-        List<Products> GetAllProducts();
+        List<Product> GetAllProducts();
 
-        Products GetProduct(int id);
+        Product GetProduct(int id);
 
-        void UpdateProduct(Products product);
+        void UpdateProduct(Product product);
 
-        void CreateProduct(Products product);
+        void CreateProduct(Product product);
     }
 }

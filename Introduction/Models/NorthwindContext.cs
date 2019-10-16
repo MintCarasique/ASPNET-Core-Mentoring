@@ -15,8 +15,8 @@ namespace Introduction.Models
         {
         }
 
-        public virtual DbSet<Categories> Categories { get; set; }
-        public virtual DbSet<Products> Products { get; set; }
-        public virtual DbSet<Suppliers> Suppliers { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Supplier> Suppliers { get; set; }
     }
 }

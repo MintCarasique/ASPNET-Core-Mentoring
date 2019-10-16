@@ -8,12 +8,12 @@ namespace Introduction.Services
 {
     public interface ICategoryService
     {
-        List<Categories> GetAllCategories();
+        List<Category> GetAllCategories();
 
-        Categories GetCategory(int id);
+        Category GetCategory(int id);
 
-        void UpdateCategory(Categories category);
+        void UpdateCategory(Category category);
 
-        void CreateCategory(Categories category);
+        void CreateCategory(Category category);
     }
 }
