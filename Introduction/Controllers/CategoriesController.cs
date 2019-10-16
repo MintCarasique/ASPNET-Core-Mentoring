@@ -34,13 +34,17 @@ namespace Introduction.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(Category categories)
+        public IActionResult Edit(Category category)
         {
             if (ModelState.IsValid)
             {
-                _categoryService.UpdateCategory(categories);
+                _categoryService.UpdateCategory(category);
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            else
+            {
+                return View(category);
+            }
         }
 
         [HttpGet]
@@ -55,6 +59,10 @@ namespace Introduction.Controllers
             if (ModelState.IsValid)
             {
                 _categoryService.CreateCategory(category);
+            }
+            else
+            {
+                return View(category);
             }
 
             return RedirectToAction("Index");

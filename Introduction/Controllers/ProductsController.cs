@@ -76,9 +76,13 @@ namespace Introduction.Controllers
             if (ModelState.IsValid)
             {
                 _productService.UpdateProduct(product);
+                return RedirectToAction("Index");
+            }
+            else 
+            {
+                return View(product);
             }
             
-            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -116,6 +120,10 @@ namespace Introduction.Controllers
             if (ModelState.IsValid)
             {
                 _productService.CreateProduct(product);
+            }
+            else
+            {
+                return View(product);
             }
 
             return RedirectToAction("Index");
