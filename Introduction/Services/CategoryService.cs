@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Introduction.Models;
 using Microsoft.EntityFrameworkCore;
@@ -35,9 +34,13 @@ namespace Introduction.Services
                     _logger.LogError("Error adding new category to database! Model is invalid");
                 }
             }
-            catch (Exception ex)
+            catch (DbUpdateConcurrencyException)
             {
-                _logger.LogError($"Error adding new category to database! {ex.Message}");
+                _logger.LogError($"A concurrency violation is encountered while saving category to the database.");
+            }
+            catch (DbUpdateException)
+            {
+                _logger.LogError($"An error is encountered while saving category to the database.");
             }
         }
 
@@ -68,18 +71,20 @@ namespace Introduction.Services
                     _logger.LogError("Error updating category in database. Model is invalid.");
                 }
             }
-            catch (Exception ex)
+            catch (DbUpdateConcurrencyException)
             {
-                _logger.LogError($"Error updating record in database: {ex.Message}");
+                _logger.LogError($"A concurrency violation is encountered while saving category '{category.CategoryID}' to the database.");
             }
-            
+            catch (DbUpdateException)
+            {
+                _logger.LogError($"An error is encountered while saving category '{category.CategoryID}' to the database.");
+            }
+
         }
 
         private bool IsValid(Category category) 
         {
-            if (category == null)
-                return false;
-            if (category.CategoryName == null)
+            if (category?.CategoryName == null)
                 return false;
             if (category.Description == null)
                 return false;

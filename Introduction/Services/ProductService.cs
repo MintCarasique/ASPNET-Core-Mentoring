@@ -35,15 +35,20 @@ namespace Introduction.Services
                     _dbContext.SaveChanges();
                     _logger.LogInformation("Record added to database successfully");
                 }
-                else 
+                else
                 {
                     _logger.LogError("Error adding new product to database. Model is invalid.");
                 }
             }
-            catch (Exception ex)
+            catch (DbUpdateConcurrencyException)
             {
-                _logger.LogError($"Error adding new record to database! {ex.Message}");
+                _logger.LogError($"A concurrency violation is encountered while saving product to the database.");
             }
+            catch (DbUpdateException)
+            {
+                _logger.LogError($"An error is encountered while saving product to the database.");
+            }
+            
         }
 
         public List<Product> GetAllProducts()
@@ -73,23 +78,25 @@ namespace Introduction.Services
                     _dbContext.SaveChanges();
                     _logger.LogInformation("Record updated successfully");
                 }
-                catch (Exception ex)
+                catch (DbUpdateConcurrencyException)
                 {
-                    _logger.LogError($"Error updating record in database: {ex.Message}");
+                    _logger.LogError($"A concurrency violation is encountered while saving product '{product.ProductID}' to the database.");
+                }
+                catch (DbUpdateException)
+                {
+                    _logger.LogError($"An error is encountered while saving product '{product.ProductID}' to the database.");
                 }
             }
             else
             {
-                _logger.LogError("Error updating product in database. Model is invalid.");
+                _logger.LogError($"Error updating product '{product.ProductID}' in database. Model is invalid.");
             }
             
         }
 
         private bool IsValid(Product product) 
         {
-            if (product == null)
-                return false;
-            if (product.CategoryID == null)
+            if (product?.CategoryID == null)
                 return false;
             if (product.SupplierID == null)
                 return false;

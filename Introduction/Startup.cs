@@ -48,10 +48,6 @@ namespace Introduction
                 //app.UseDeveloperExceptionPage();
                 app.UseExceptionHandler("/Error/exceptionError");
             }
-            else 
-            {
-               
-            }
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
