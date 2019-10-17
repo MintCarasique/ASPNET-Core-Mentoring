@@ -77,12 +77,12 @@ namespace Introduction
 
         private void OnApplicationStopping()
         {
-
+            _logger.LogInformation("Stopping application...");
         }
 
         private void OnApplicationStopped()
         {
-
+            _logger.LogInformation("Application stopped successfully");
         }
     }
 }
