@@ -11,9 +11,12 @@ namespace Introduction
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly ILogger _logger;
+
+        public Startup(IConfiguration configuration, ILogger<Startup> logger)
         {
             Configuration = configuration;
+            _logger = logger;
         }
 
         public IConfiguration Configuration { get; }
@@ -32,10 +35,14 @@ namespace Introduction
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(
             IApplicationBuilder app, 
-            IHostingEnvironment env, 
-            ILogger<Startup> logger)
+            IHostingEnvironment env,
+            IApplicationLifetime applicationLifetime)
         {
-            logger.LogInformation("Application started successfully");
+            applicationLifetime.ApplicationStarted.Register(OnApplicationStarted);
+            applicationLifetime.ApplicationStopping.Register(OnApplicationStopping);
+            applicationLifetime.ApplicationStopped.Register(OnApplicationStopped);
+
+            _logger.LogInformation("Application started successfully");
             if (env.IsDevelopment())
             {
                 //app.UseDeveloperExceptionPage();
@@ -56,6 +63,26 @@ namespace Introduction
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+
+        private void OnApplicationStarted()
+        {
+            var children = Configuration.GetChildren();
+            foreach (var section in children)
+            {
+                _logger.LogInformation($"Configuration section '{section.Key}' with value '{section.Value}' successfully loaded.");
+            }
+            _logger.LogInformation("Application started.");
+        }
+
+        private void OnApplicationStopping()
+        {
+
+        }
+
+        private void OnApplicationStopped()
+        {
+
         }
     }
 }
