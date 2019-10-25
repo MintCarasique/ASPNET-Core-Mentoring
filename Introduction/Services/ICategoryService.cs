@@ -1,7 +1,7 @@
-﻿using Introduction.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Northwind.Models;
 
-namespace Introduction.Services
+namespace Northwind.Services
 {
     public interface ICategoryService
     {

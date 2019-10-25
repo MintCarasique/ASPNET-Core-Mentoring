@@ -1,11 +1,11 @@
-﻿using Introduction.Models;
-using Introduction.Services;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
+using Northwind.Models;
+using Northwind.Services;
 
-namespace Introduction.Controllers
+namespace Northwind.Controllers
 {
     public class ProductsController : Controller
     {

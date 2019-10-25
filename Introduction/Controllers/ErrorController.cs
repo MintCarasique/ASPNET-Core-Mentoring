@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace Introduction.Controllers
+namespace Northwind.Controllers
 {
     public class ErrorController : Controller
     {

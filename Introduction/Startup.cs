@@ -1,13 +1,13 @@
-﻿using Introduction.Models;
-using Introduction.Services;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Northwind.Models;
+using Northwind.Services;
 
-namespace Introduction
+namespace Northwind
 {
     public class Startup
     {

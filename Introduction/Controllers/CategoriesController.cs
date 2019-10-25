@@ -1,8 +1,8 @@
-﻿using Introduction.Models;
-using Introduction.Services;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Northwind.Models;
+using Northwind.Services;
 
-namespace Introduction.Controllers
+namespace Northwind.Controllers
 {
     public class CategoriesController : Controller
     {

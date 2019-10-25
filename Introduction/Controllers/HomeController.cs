@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Introduction.Controllers
+namespace Northwind.Controllers
 {
     public class HomeController : Controller
     {
