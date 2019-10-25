@@ -15,10 +15,12 @@ namespace Northwind.Models
 
         [Required]
         [StringLength(100)]
+        [Display(Name = "Category Name")]
         public string CategoryName { get; set; }
 
         [Required]
         [StringLength(500)]
+        [Display(Name = "Description")]
         public string Description { get; set; }
         public byte[] Picture { get; set; }
 
