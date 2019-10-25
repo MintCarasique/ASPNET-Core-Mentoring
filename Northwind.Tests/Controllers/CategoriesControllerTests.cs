@@ -46,8 +46,24 @@ namespace Northwind.Tests.Controllers
             var result = controller.Edit(category);
 
             // assert
-            var viewResult = Assert.IsType<RedirectToActionResult>(result);
+            Assert.IsType<RedirectToActionResult>(result);
             categoryServiceMock.Verify(_ => _.UpdateCategory(category), Times.Once);
+        }
+
+        [Fact]
+        public void Edit_IfModelInvalid_ShouldReturnToEditView()
+        {
+            // arrange
+            var category = new Category { CategoryID = 1, CategoryName = "Test" };
+            var categoryServiceMock = ICategoryService(new List<Category> { category });
+            var controller = new CategoriesController(categoryServiceMock.Object);
+
+            // act
+            var result = controller.Edit(null);
+
+            // assert
+            Assert.IsType<ViewResult>(result);
+            categoryServiceMock.Verify(_ => _.UpdateCategory(category), Times.Never);
         }
 
         private Mock<ICategoryService> ICategoryService(List<Category> categoriesList)

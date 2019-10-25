@@ -32,7 +32,7 @@ namespace Northwind.Controllers
         [HttpPost]
         public IActionResult Edit(Category category)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && category != null)
             {
                 _categoryService.UpdateCategory(category);
                 return RedirectToAction("Index");
