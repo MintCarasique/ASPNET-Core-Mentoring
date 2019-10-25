@@ -2,7 +2,7 @@
 
 namespace Northwind.Repositories
 {
-    interface IRepository<T>
+    public interface IRepository<T>
     {
         List<T> GetAll();
 
