@@ -1,21 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Northwind.Models;
+using Northwind.Repositories;
 
 namespace Northwind.Services
 {
     public class SupplierService : ISupplierService
     {
-        private readonly NorthwindContext _dbContext;
+        private readonly IRepository<Supplier> _supplierRepository;
 
-        public SupplierService(NorthwindContext context)
+        public SupplierService(IRepository<Supplier> supplierRepository)
         {
-            _dbContext = context;
+            _supplierRepository = supplierRepository;
         }
 
         public List<Supplier> GetAllSuppliers()
         {
-            return _dbContext.Suppliers.ToList();
+            return _supplierRepository.GetAll();
         }
     }
 }

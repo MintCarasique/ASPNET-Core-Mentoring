@@ -18,7 +18,7 @@ namespace Northwind.Repositories
 
         private readonly ILogger _logger;
 
-        public ProductRepository(NorthwindContext context, IConfiguration configuration, ILogger<ProductService> logger)
+        public ProductRepository(NorthwindContext context, IConfiguration configuration, ILogger<ProductRepository> logger)
         {
             _dbContext = context;
             _configuration = configuration;
