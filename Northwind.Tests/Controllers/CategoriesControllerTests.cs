@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Northwind.Controllers;
@@ -20,22 +21,40 @@ namespace Northwind.Tests.Controllers
                 new Category {CategoryID = 2, CategoryName = "Test2"}
             };
 
-            var categoryService = ICategoryService(categoriesList).Object;
+            var categoryServiceMock = ICategoryService(categoriesList);
 
-            var controller = new CategoriesController(categoryService);
+            var controller = new CategoriesController(categoryServiceMock.Object);
 
             // act
             var result = controller.Index();
 
             // assert
             var viewResult = Assert.IsType<ViewResult>(result);
+            categoryServiceMock.Verify(x => x.GetAllCategories(), Times.Once);
             Assert.True(viewResult.Model == categoriesList);
         }
 
-        private IMock<ICategoryService> ICategoryService(List<Category> categoriesList)
+        [Fact]
+        public void Edit_IfModelValid_ShouldCallCategoryServiceMethod()
+        {
+            // arrange
+            var category = new Category {CategoryID = 1, CategoryName = "Test"};
+            var categoryServiceMock = ICategoryService(new List<Category>{category});
+            var controller = new CategoriesController(categoryServiceMock.Object);
+
+            // act
+            var result = controller.Edit(category);
+
+            // assert
+            var viewResult = Assert.IsType<RedirectToActionResult>(result);
+            categoryServiceMock.Verify(_ => _.UpdateCategory(category), Times.Once);
+        }
+
+        private Mock<ICategoryService> ICategoryService(List<Category> categoriesList)
         {
             var categoryService = new Mock<ICategoryService>();
             categoryService.Setup(_ => _.GetAllCategories()).Returns(categoriesList);
+            categoryService.Setup(_ => _.UpdateCategory(categoriesList.FirstOrDefault()));
             return categoryService;
         }
     }
