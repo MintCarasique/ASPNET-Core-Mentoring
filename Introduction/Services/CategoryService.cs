@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Microsoft.Extensions.Logging;
 using Northwind.Models;
 using Northwind.Repositories;
 

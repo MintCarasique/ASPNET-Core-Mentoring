@@ -27,7 +27,7 @@ namespace Northwind.Repositories
 
         public Category Get(int id)
         {
-            _logger.LogInformation("Getting certain category from database");
+            _logger.LogInformation($"Getting certain category with id = {id} from database");
             return _dbContext.Categories.FirstOrDefault(_ => _.CategoryID == id);
         }
 
