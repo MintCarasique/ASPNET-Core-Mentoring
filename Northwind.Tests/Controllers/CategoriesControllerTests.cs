@@ -13,110 +13,130 @@ namespace Northwind.Tests.Controllers
     {
         private CategoriesController _categoriesController;
 
-        private Mock<CategoryService> _categoryServiceMock;
+        private Mock<ICategoryService> _categoryServiceMock;
+
+        private List<Category> _categoryList;
 
         [Fact]
         public void Index_ShouldReturnViewResult_ShouldReturnModel()
         {
             // arrange
-            var categoriesList = new List<Category>
-            {
-                new Category {CategoryID = 1, CategoryName = "Test"},
-                new Category {CategoryID = 2, CategoryName = "Test2"}
-            };
-
-            var categoryServiceMock = ICategoryService(categoriesList);
-
-            var controller = new CategoriesController(categoryServiceMock.Object);
+            InitializeController();
 
             // act
-            var result = controller.Index();
+            var result = _categoriesController.Index();
 
             // assert
             var viewResult = Assert.IsType<ViewResult>(result);
-            categoryServiceMock.Verify(x => x.GetAllCategories(), Times.Once);
-            Assert.True(viewResult.Model == categoriesList);
+            _categoryServiceMock.Verify(x => x.GetAllCategories(), Times.Once);
+            Assert.True(viewResult.Model == _categoryList);
         }
 
         [Fact]
         public void Edit_IfModelValid_ShouldCallCategoryServiceMethod()
         {
             // arrange
-            var category = new Category {CategoryID = 1, CategoryName = "Test"};
-            var categoryServiceMock = ICategoryService(new List<Category>{category});
-            var controller = new CategoriesController(categoryServiceMock.Object);
+            InitializeController();
 
             // act
-            var result = controller.Edit(category);
+            var result = _categoriesController.Edit(_categoryList.FirstOrDefault());
 
             // assert
             Assert.IsType<RedirectToActionResult>(result);
-            categoryServiceMock.Verify(_ => _.UpdateCategory(category), Times.Once);
+            _categoryServiceMock.Verify(_ => _.UpdateCategory(_categoryList.FirstOrDefault()), Times.Once);
         }
 
         [Fact]
         public void Edit_IfModelInvalid_ShouldReturnToEditView()
         {
             // arrange
-            var category = new Category { CategoryID = 1, CategoryName = "Test" };
-            var categoryServiceMock = ICategoryService(new List<Category> { category });
-            var controller = new CategoriesController(categoryServiceMock.Object);
+            InitializeController();
 
             // act
-            var result = controller.Edit(null);
+            var result = _categoriesController.Edit(null);
 
             // assert
             Assert.IsType<ViewResult>(result);
-            categoryServiceMock.Verify(_ => _.UpdateCategory(category), Times.Never);
+            _categoryServiceMock.Verify(_ => _.UpdateCategory(_categoryList.FirstOrDefault()), Times.Never);
         }
 
         [Fact]
         public void Edit_IfIdValid_ShouldReturnView()
         {
             // arrange
-            var category = new Category { CategoryID = 1, CategoryName = "Test" };
-            var categoryServiceMock = ICategoryService(new List<Category> { category });
-            var controller = new CategoriesController(categoryServiceMock.Object);
+            InitializeController();
 
             // act
-            var result = controller.Edit(1);
+            var result = _categoriesController.Edit(1);
 
             // assert
             Assert.IsType<ViewResult>(result);
-            categoryServiceMock.Verify(_ => _.GetCategory(1), Times.Once);
+            _categoryServiceMock.Verify(_ => _.GetCategory(1), Times.Once);
         }
 
         [Fact]
         public void Edit_IfIdInvalid_ShouldRedirectToAction()
         {
             // arrange
-            var category = new Category { CategoryID = 1, CategoryName = "Test" };
-            var categoryServiceMock = ICategoryService(new List<Category> { category });
-            var controller = new CategoriesController(categoryServiceMock.Object);
+            InitializeController();
 
             // act
-            var result = controller.Edit(0);
+            var result = _categoriesController.Edit(0);
 
             // assert
             Assert.IsType<RedirectToActionResult>(result);
-            categoryServiceMock.Verify(_ => _.GetCategory(0), Times.Once);
+            _categoryServiceMock.Verify(_ => _.GetCategory(0), Times.Once);
         }
 
-        private Mock<ICategoryService> ICategoryService(List<Category> categoriesList)
+        [Fact]
+        public void Create_IfCategoryValid_ShouldCreateNewCategory_ShouldReturnReturnRedirectToAction()
+        {
+            // arrange
+            InitializeController();
+            var newCategory = new Category { CategoryID = 3, CategoryName = "New_Test" };
+
+            // act
+            var result = _categoriesController.Create(newCategory);
+
+            // assert
+            Assert.IsType<RedirectToActionResult>(result);
+            _categoryServiceMock.Verify(_ => _.CreateCategory(newCategory), Times.Once);
+        }
+
+        [Fact]
+        public void Create_IfCategoryInvalid_IfModelStateInvalid_ShouldReturnView()
+        {
+            // arrange
+            InitializeController();
+
+            // act
+            var result = _categoriesController.Create(null);
+
+            // assert
+            Assert.IsType<ViewResult>(result);
+            _categoryServiceMock.Verify(_ => _.CreateCategory(It.IsAny<Category>()), Times.Never);
+        }
+
+        private Mock<ICategoryService> InitializeCategoryService(List<Category> categoriesList)
         {
             var categoryService = new Mock<ICategoryService>();
             categoryService.Setup(_ => _.GetCategory(1)).Returns(categoriesList.FirstOrDefault);
             categoryService.Setup(_ => _.GetCategory(0)).Returns((Category) null);
             categoryService.Setup(_ => _.GetAllCategories()).Returns(categoriesList);
-            categoryService.Setup(_ => _.UpdateCategory(categoriesList.FirstOrDefault()));
+            categoryService.Setup(_ => _.UpdateCategory(It.IsAny<Category>()));
+            categoryService.Setup(_ => _.CreateCategory(It.IsAny<Category>()));
             return categoryService;
         }
 
         private void InitializeController()
         {
-            var category = new Category { CategoryID = 1, CategoryName = "Test" };
-            var categoryServiceMock = ICategoryService(new List<Category> { category });
-            _categoriesController = new CategoriesController(categoryServiceMock.Object);
+            _categoryList = new List<Category>
+            {
+                new Category {CategoryID = 1, CategoryName = "Test"},
+                new Category {CategoryID = 2, CategoryName = "Test2"}
+            };
+            _categoryServiceMock = InitializeCategoryService(_categoryList);
+            _categoriesController = new CategoriesController(_categoryServiceMock.Object);
         }
     }
 }

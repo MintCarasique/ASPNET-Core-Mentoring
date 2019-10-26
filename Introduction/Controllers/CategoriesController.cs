@@ -52,7 +52,7 @@ namespace Northwind.Controllers
         [HttpPost]
         public IActionResult Create(Category category) 
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && category != null)
             {
                 _categoryService.CreateCategory(category);
             }
