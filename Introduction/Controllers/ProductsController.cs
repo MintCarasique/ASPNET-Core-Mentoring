@@ -44,24 +44,18 @@ namespace Northwind.Controllers
                 return RedirectToAction("Index");
             }
 
-            List<SelectListItem> categoryListItems = _categoryService.GetAllCategories().ConvertAll(a => 
+            var categoryListItems = _categoryService.GetAllCategories().ConvertAll(a => new SelectListItem()
             {
-                return new SelectListItem()
-                {
-                    Text = a.CategoryName,
-                    Value = a.CategoryID.ToString(),
-                    Selected = a.CategoryID == model.CategoryID
-                };
+                Text = a.CategoryName,
+                Value = a.CategoryID.ToString(),
+                Selected = a.CategoryID == model.CategoryID
             });
 
-            List<SelectListItem> suppliersListItems = _supplierService.GetAllSuppliers().ConvertAll(a =>
+            var suppliersListItems = _supplierService.GetAllSuppliers().ConvertAll(a => new SelectListItem()
             {
-                return new SelectListItem()
-                {
-                    Text = a.CompanyName,
-                    Value = a.SupplierID.ToString(),
-                    Selected = a.SupplierID == model.SupplierID
-                };
+                Text = a.CompanyName,
+                Value = a.SupplierID.ToString(),
+                Selected = a.SupplierID == model.SupplierID
             });
 
             ViewBag.Categories = categoryListItems;
@@ -72,7 +66,7 @@ namespace Northwind.Controllers
         [HttpPost]
         public IActionResult Edit(Product product)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && product != null)
             {
                 _productService.UpdateProduct(product);
                 return RedirectToAction("Index");
@@ -87,24 +81,18 @@ namespace Northwind.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            List<SelectListItem> categoryListItems = _categoryService.GetAllCategories().ConvertAll(a =>
+            var categoryListItems = _categoryService.GetAllCategories().ConvertAll(a => new SelectListItem()
             {
-                return new SelectListItem()
-                {
-                    Text = a.CategoryName,
-                    Value = a.CategoryID.ToString(),
-                    Selected = false
-                };
+                Text = a.CategoryName,
+                Value = a.CategoryID.ToString(),
+                Selected = false
             });
 
-            List<SelectListItem> suppliersListItems = _supplierService.GetAllSuppliers().ConvertAll(a =>
+            var suppliersListItems = _supplierService.GetAllSuppliers().ConvertAll(a => new SelectListItem()
             {
-                return new SelectListItem()
-                {
-                    Text = a.CompanyName,
-                    Value = a.SupplierID.ToString(),
-                    Selected = false
-                };
+                Text = a.CompanyName,
+                Value = a.SupplierID.ToString(),
+                Selected = false
             });
 
             ViewBag.Categories = categoryListItems;
@@ -116,7 +104,7 @@ namespace Northwind.Controllers
         [HttpPost]
         public IActionResult Create(Product product)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && product != null)
             {
                 _productService.CreateProduct(product);
             }
