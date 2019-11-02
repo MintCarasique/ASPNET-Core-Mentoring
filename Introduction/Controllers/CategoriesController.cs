@@ -63,5 +63,10 @@ namespace Northwind.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public IActionResult Image(int id)
+        {
+            return File(_categoryService.GetCategoryImage(id), "image/bmp");
+        }
     }
 }

@@ -22,6 +22,7 @@ namespace Northwind.Models
         [StringLength(500)]
         [Display(Name = "Description")]
         public string Description { get; set; }
+
         public byte[] Picture { get; set; }
 
         public ICollection<Product> Products { get; set; }

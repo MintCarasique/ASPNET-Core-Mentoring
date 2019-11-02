@@ -29,5 +29,7 @@ namespace Northwind.Services
         /// </summary>
         /// <param name="category">New category</param>
         void CreateCategory(Category category);
+
+        byte[] GetCategoryImage(int id);
     }
 }

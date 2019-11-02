@@ -1,4 +1,4 @@
-﻿
+﻿@model List<Northwind.Models.Category>
 @{
     ViewData["Title"] = "Index";
 }
@@ -9,6 +9,7 @@
         <tr>
             <th>Category Name</th>
             <th>Description</th>
+            <th>Picture</th>
         </tr>
     </thead>
     <tbody>
@@ -24,8 +25,20 @@
                 <td>
                     <a class="btn-primary" asp-action="Edit" asp-route-id="@category.CategoryID">Edit</a>
                 </td>
+                @if (category.Picture != null)
+                {
+                    <td>
+                        <img src="@Url.Action("Image", new { id = category.CategoryID })" />
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <span>Picture not found</span>
+                    </td>
+                }
             </tr>
         }
-    </tbody>    
+    </tbody>
 </table>
 <a class="btn-primary" asp-action="Create">Create</a>
