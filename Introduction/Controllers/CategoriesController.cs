@@ -36,10 +36,9 @@ namespace Northwind.Controllers
         {
             if (ModelState.IsValid && category != null)
             {
-                byte[] imageData = null;
                 if (categoryPicture != null)
                 {
-                    
+                    byte[] imageData;
                     using (var binaryReader = new BinaryReader(categoryPicture.OpenReadStream()))
                     {
                         imageData = binaryReader.ReadBytes((int)categoryPicture.Length);
@@ -77,6 +76,7 @@ namespace Northwind.Controllers
             return RedirectToAction("Index");
         }
 
+        [Route("/images/{id}")]
         public IActionResult Image(int id)
         {
             return File(_categoryService.GetCategoryImage(id), "image/bmp");

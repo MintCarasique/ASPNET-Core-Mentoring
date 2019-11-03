@@ -27,18 +27,6 @@ namespace Northwind.Services
             var picture = _categoryRepository.Get(id).Picture;
             if (picture != null)
             {
-                //using (var ms = new MemoryStream())
-                //{
-                //    const int offset = 78;
-                //    ms.Write(picture, offset, picture.Length - offset);
-                //    var bmp = new Bitmap(ms);
-                //    using (var bmpms = new MemoryStream())
-                //    {
-                //        bmp.Save(bmpms, System.Drawing.Imaging.ImageFormat.Bmp);
-                //        return bmpms.ToArray();
-                //    }
-                //}
-
                 return GetImageBytesFromOleField(picture);
             }
             return new byte[0];
