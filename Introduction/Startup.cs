@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Northwind.Middleware;
 using Northwind.Models;
 using Northwind.Repositories;
 using Northwind.Services;
@@ -34,6 +35,8 @@ namespace Northwind
             services.AddScoped<IRepository<Category>, CategoryRepository>();
             services.AddScoped<IRepository<Product>, ProductRepository>();
             services.AddScoped<IRepository<Supplier>, SupplierRepository>();
+
+            services.AddSingleton<IConfigurationService, ConfigurationService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,17 +55,20 @@ namespace Northwind
                 //app.UseDeveloperExceptionPage();
                 app.UseExceptionHandler("/Error/exceptionError");
             }
+            app.UseImageCaching();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseStatusCodePagesWithRedirects("/Error/HttpError");
+            
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+            
         }
 
         private void OnApplicationStarted()

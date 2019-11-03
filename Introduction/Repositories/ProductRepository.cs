@@ -14,14 +14,14 @@ namespace Northwind.Repositories
     {
         private readonly NorthwindContext _dbContext;
 
-        private readonly IConfiguration _configuration;
+        private readonly IConfigurationService _configurationService;
 
         private readonly ILogger _logger;
 
-        public ProductRepository(NorthwindContext context, IConfiguration configuration, ILogger<ProductRepository> logger)
+        public ProductRepository(NorthwindContext context, IConfigurationService configurationService, ILogger<ProductRepository> logger)
         {
             _dbContext = context;
-            _configuration = configuration;
+            _configurationService = configurationService;
             _logger = logger;
         }
 
@@ -60,7 +60,7 @@ namespace Northwind.Repositories
         public List<Product> GetAll()
         {
             _logger.LogInformation("Getting all products from database");
-            int maxAmount = Convert.ToInt32(_configuration.GetSection("ProductParams").GetSection("MaxAmountPerRequest").Value);
+            int maxAmount = _configurationService.MaxProductCount;
             _logger.LogInformation($"Max amount of products written in configuration: {maxAmount.ToString()}");
             return _dbContext.Products.Take(maxAmount == 0 ? _dbContext.Products.Count() : maxAmount)
                 .Include(product => product.Category)

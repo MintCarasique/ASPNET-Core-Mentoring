@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Northwind.Common;
 using Northwind.Models;
 using Northwind.Services;
 
@@ -79,7 +80,7 @@ namespace Northwind.Controllers
         [Route("/images/{id}")]
         public IActionResult Image(int id)
         {
-            return File(_categoryService.GetCategoryImage(id), "image/bmp");
+            return File(_categoryService.GetCategoryImage(id), Constants.CONTENT_TYPE_BMP);
         }
     }
 }
