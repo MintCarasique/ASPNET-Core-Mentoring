@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.IO;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Northwind.Models;
 using Northwind.Services;
 
@@ -30,10 +32,21 @@ namespace Northwind.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(Category category)
+        public IActionResult Edit(Category category, IFormFile categoryPicture = null)
         {
             if (ModelState.IsValid && category != null)
             {
+                byte[] imageData = null;
+                if (categoryPicture != null)
+                {
+                    
+                    using (var binaryReader = new BinaryReader(categoryPicture.OpenReadStream()))
+                    {
+                        imageData = binaryReader.ReadBytes((int)categoryPicture.Length);
+                    }
+
+                    category.Picture = imageData;
+                }
                 _categoryService.UpdateCategory(category);
                 return RedirectToAction("Index");
             }
