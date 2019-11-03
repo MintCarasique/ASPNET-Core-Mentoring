@@ -35,15 +35,6 @@ namespace Northwind.Middleware
                 TimeSpan.FromSeconds(_configurationService.CacheLifeTime));
         }
 
-        //public async Task InvokeAsync(HttpContext context)
-        //{
-        //    if ( context.Response.ContentType != null && context.Response.ContentType == Constants.CONTENT_TYPE_BMP)
-        //    {
-        //        _logger.LogInformation("Image found");
-        //    }
-        //    await _next.Invoke(context);
-        //}
-
         public async Task InvokeAsync(HttpContext context)
         {
             _timer.Change(_configurationService.CacheLifeTime * 1000, 0);

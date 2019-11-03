@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Northwind.Filters;
 using Northwind.Middleware;
 using Northwind.Models;
 using Northwind.Repositories;
@@ -37,6 +40,14 @@ namespace Northwind
             services.AddScoped<IRepository<Supplier>, SupplierRepository>();
 
             services.AddSingleton<IConfigurationService, ConfigurationService>();
+
+            Action<MvcOptions> configMvcAction = x => { };
+
+            var isLoggingEnabled = Configuration.GetSection("Logging").GetValue<bool>("ActionLoggingEnabled");
+            if (isLoggingEnabled)
+                configMvcAction = options => options.Filters.Add(typeof(LoggingFilterAttribute));
+
+            services.AddMvc(configMvcAction);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
