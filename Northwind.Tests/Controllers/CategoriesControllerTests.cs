@@ -3,8 +3,8 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Northwind.Controllers;
-using Northwind.Models;
-using Northwind.Services;
+using Northwind.Core.Models;
+using Northwind.Core.Services;
 using Xunit;
 
 namespace Northwind.Tests.Controllers

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Northwind.Models
+namespace Northwind.Core.Models
 {
     public partial class Supplier
     {

@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using Northwind.Models;
-using Northwind.Repositories;
+using Northwind.Core.Models;
+using Northwind.Core.Repositories;
 
-namespace Northwind.Services
+namespace Northwind.Core.Services
 {
     public class SupplierService : ISupplierService
     {

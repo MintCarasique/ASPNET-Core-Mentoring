@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Text;
-using Northwind.Models;
-using Northwind.Repositories;
+using Northwind.Core.Models;
+using Northwind.Core.Repositories;
 
-namespace Northwind.Services
+namespace Northwind.Core.Services
 {
     public class CategoryService : ICategoryService
     {

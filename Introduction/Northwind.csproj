@@ -13,4 +13,8 @@
     <PackageReference Include="System.Drawing.Common" Version="4.6.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Northwind.Core\Northwind.Core.csproj" />
+  </ItemGroup>
+
 </Project>

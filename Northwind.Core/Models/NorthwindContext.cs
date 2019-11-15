@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Northwind.Models
+namespace Northwind.Core.Models
 {
     public partial class NorthwindContext : DbContext
     {

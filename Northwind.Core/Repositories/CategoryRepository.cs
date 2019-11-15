@@ -1,10 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using Northwind.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Northwind.Core.Models;
 
-namespace Northwind.Repositories
+namespace Northwind.Core.Repositories
 {
     public class CategoryRepository : IRepository<Category>
     {

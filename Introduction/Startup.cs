@@ -6,12 +6,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Northwind.Core.Models;
+using Northwind.Core.Repositories;
+using Northwind.Core.Services;
 using Northwind.Filters;
 using Northwind.Middleware;
-using Northwind.Models;
-using Northwind.Repositories;
-using Northwind.Services;
-
 namespace Northwind
 {
     public class Startup

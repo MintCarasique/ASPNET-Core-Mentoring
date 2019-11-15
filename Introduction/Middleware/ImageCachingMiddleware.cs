@@ -8,7 +8,7 @@ using Microsoft.ApplicationInsights.AspNetCore.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Northwind.Common;
-using Northwind.Services;
+using Northwind.Core.Services;
 
 namespace Northwind.Middleware
 {

@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Northwind.Common;
-using Northwind.Models;
-using Northwind.Services;
+using Northwind.Core.Models;
+using Northwind.Core.Services;
 
 namespace Northwind.Controllers
 {

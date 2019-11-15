@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
-using Northwind.Models;
-using Northwind.Services;
+using Northwind.Core.Models;
+using Northwind.Core.Services;
 
 namespace Northwind.Controllers
 {

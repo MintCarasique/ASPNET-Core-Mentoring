@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.Logging;
-using Northwind.Models;
+using Northwind.Core.Models;
 
-namespace Northwind.Repositories
+namespace Northwind.Core.Repositories
 {
     public class SupplierRepository : IRepository<Supplier>
     {

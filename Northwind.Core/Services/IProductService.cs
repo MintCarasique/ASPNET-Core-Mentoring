@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Northwind.Models;
+using Northwind.Core.Models;
 
-namespace Northwind.Services
+namespace Northwind.Core.Services
 {
     public interface IProductService
     {
