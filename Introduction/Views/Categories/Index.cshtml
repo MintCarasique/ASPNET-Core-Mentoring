@@ -1,4 +1,5 @@
-﻿@model List<Northwind.Core.Models.Category>
+﻿@using Northwind.Helpers
+@model List<Northwind.Core.Models.Category>
 @{
     ViewData["Title"] = "Index";
 }
@@ -29,6 +30,7 @@
                 {
                     <td>
                         <img src="@Url.Action("Image", new { id = category.CategoryID })" />
+                        @Html.CreateImageLink(category.CategoryID.ToString(), "Download image")
                     </td>
                 }
                 else
