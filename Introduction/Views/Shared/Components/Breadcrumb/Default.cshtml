@@ -1,0 +1,12 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<a class="btn btn-primary" asp-controller="Home" asp-action="Index">Home</a>
+@if (ViewBag.Controller != null)
+{
+    <a class="btn btn-primary" asp-controller="@ViewBag.Controller" asp-action="Index">@ViewBag.Controller</a>
+    @if (ViewBag.Action != "Index")
+    {
+        <a class="btn btn-primary" asp-controller="@ViewBag.Controller" asp-action="@ViewBag.Action">@ViewBag.Action</a>
+    }
+}

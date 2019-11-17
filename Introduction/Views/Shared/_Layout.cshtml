@@ -20,6 +20,7 @@
     @if (IsSectionDefined("Header"))
     {
         @RenderSection("Header")
+        
     }
     else
     {
@@ -44,7 +45,10 @@
             </div>
         </nav>
     }
-
+<div>
+    @await Component.InvokeAsync("Breadcrumb")
+</div>
+    
 
     <div class="container body-content">
         @RenderBody()
