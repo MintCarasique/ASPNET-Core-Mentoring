@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -62,15 +63,15 @@ namespace Northwind
             _logger.LogInformation("Application started successfully");
             if (env.IsDevelopment())
             {
-                //app.UseDeveloperExceptionPage();
-                app.UseExceptionHandler("/Error/exceptionError");
+                app.UseDeveloperExceptionPage();
+                //app.UseExceptionHandler("/Error/exceptionError");
             }
             app.UseImageCaching();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            app.UseStatusCodePagesWithRedirects("/Error/HttpError");
+            //app.UseStatusCodePagesWithRedirects("/Error/HttpError");
             
             app.UseMvc(routes =>
             {
