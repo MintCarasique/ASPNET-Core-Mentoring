@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Northwind.Core.Models
@@ -24,6 +25,7 @@ namespace Northwind.Core.Models
         public string Fax { get; set; }
         public string HomePage { get; set; }
 
+        [JsonIgnore]
         public ICollection<Product> Products { get; set; }
     }
 }

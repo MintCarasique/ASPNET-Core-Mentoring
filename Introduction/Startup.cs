@@ -55,7 +55,7 @@ namespace Northwind
             IHostingEnvironment env,
             IApplicationLifetime applicationLifetime)
         {
-            applicationLifetime.ApplicationStarted.Register(OnApplicationStarted);
+            //applicationLifetime.ApplicationStarted.Register(OnApplicationStarted);
             applicationLifetime.ApplicationStopping.Register(OnApplicationStopping);
             applicationLifetime.ApplicationStopped.Register(OnApplicationStopped);
 

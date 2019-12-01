@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 
 namespace Northwind.Core.Models
 {
@@ -25,6 +27,7 @@ namespace Northwind.Core.Models
 
         public byte[] Picture { get; set; }
 
+        [JsonIgnore]
         public ICollection<Product> Products { get; set; }
     }
 }
