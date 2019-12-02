@@ -21,10 +21,19 @@ namespace Northwind.GeneratedClientTests
         public void GetProductById_IfIdValid_ShouldReturnProduct()
         {
             var http = new HttpClient();
-            var client = new CategoriesApiClient(http);
+            var client = new ProductsApiClient(http);
             var result = client.GetAsync(1).Result;
             Assert.NotNull(result);
             Assert.Equal(1, result.CategoryID);
+        }
+
+        [Fact]
+        public void GetProductById_IfIdInvalid_ShouldReturnNull()
+        {
+            var http = new HttpClient();
+            var client = new ProductsApiClient(http);
+            var result = client.GetAsync(-5).Result;
+            Assert.Null(result);
         }
     }
 }

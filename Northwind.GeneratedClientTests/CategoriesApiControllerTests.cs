@@ -25,5 +25,14 @@ namespace Northwind.GeneratedClientTests
             Assert.NotNull(result);
             Assert.Equal(1, result.CategoryID);
         }
+
+        [Fact]
+        public void GetCategoryById_IfIdInvalid_ShouldReturnNull()
+        {
+            var http = new HttpClient();
+            var client = new CategoriesApiClient(http);
+            var result = client.GetAsync(-5).Result;
+            Assert.Null(result);
+        }
     }
 }
