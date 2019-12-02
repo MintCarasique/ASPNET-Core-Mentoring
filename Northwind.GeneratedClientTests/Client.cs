@@ -15,13 +15,13 @@ namespace Northwind.GeneratedClientTests
     using System = global::System;
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.1.6.0 (NJsonSchema v10.0.28.0 (Newtonsoft.Json v11.0.0.0))")]
-    public partial class CategoriesClient
+    public partial class NorthwindClient
     {
         private string _baseUrl = "http://localhost:65364";
         private System.Net.Http.HttpClient _httpClient;
         private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
 
-        public CategoriesClient(System.Net.Http.HttpClient httpClient)
+        public NorthwindClient(System.Net.Http.HttpClient httpClient)
         {
             _httpClient = httpClient;
             _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(() =>
