@@ -48,6 +48,7 @@ namespace Northwind
                 configMvcAction = options => options.Filters.Add(typeof(LoggingFilterAttribute));
 
             services.AddMvc(configMvcAction);
+            services.AddSwaggerDocument();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,6 +73,8 @@ namespace Northwind
             app.UseStaticFiles();
 
             //app.UseStatusCodePagesWithRedirects("/Error/HttpError");
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
             
             app.UseMvc(routes =>
             {
