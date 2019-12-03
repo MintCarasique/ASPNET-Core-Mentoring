@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -46,6 +47,12 @@ namespace Northwind.Controllers.Api
         {
             value.CategoryID = id;
             _categoryService.UpdateCategory(value);
+        }
+
+        [Route("image/{id}")]
+        public FileContentResult Image(int id)
+        {
+            return File(_categoryService.GetCategoryImage(id), "image/bmp");
         }
     }
 }
