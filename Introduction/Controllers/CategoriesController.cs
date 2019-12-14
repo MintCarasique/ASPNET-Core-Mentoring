@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Northwind.Common;
@@ -16,6 +17,7 @@ namespace Northwind.Controllers
             _categoryService = categoryService;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             return View(_categoryService.GetAllCategories());
