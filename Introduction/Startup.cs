@@ -43,12 +43,7 @@ namespace Northwind
             services.AddScoped<IRepository<Supplier>, SupplierRepository>();
 
             services.AddSingleton<IConfigurationService, ConfigurationService>();
-            services.ConfigureApplicationCookie(options =>
-            {
-                options.LoginPath = $"/Identity/Account/Login";
-                options.LogoutPath = $"/Identity/Account/Logout";
-                options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
-            });
+            
             Action<MvcOptions> configMvcAction = x => { };
 
             var isLoggingEnabled = Configuration.GetSection("Logging").GetValue<bool>("ActionLoggingEnabled");
@@ -79,7 +74,7 @@ namespace Northwind
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            
+            app.UseAuthentication();
             //app.UseStatusCodePagesWithRedirects("/Error/HttpError");
             app.UseOpenApi();
             app.UseSwaggerUi3();
