@@ -21,8 +21,7 @@ namespace Northwind.Areas.Identity
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("IdentityContextConnection")));
 
-                services.AddDefaultIdentity<IdentityUser>()
-                    .AddRoles<IdentityRole>()
+                services.AddIdentity<IdentityUser, IdentityRole>()
                     .AddEntityFrameworkStores<IdentityContext>()
                     .AddDefaultTokenProviders();
                 services.ConfigureApplicationCookie(options =>

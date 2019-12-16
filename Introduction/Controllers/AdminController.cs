@@ -9,7 +9,7 @@ using Northwind.ViewModels;
 
 namespace Northwind.Controllers
 {
-    //[Authorize(Roles = "admin")]
+    [Authorize(Roles = "admin")]
     public class AdminController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
