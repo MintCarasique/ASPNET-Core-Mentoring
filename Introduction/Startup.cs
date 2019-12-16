@@ -3,6 +3,7 @@ using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -14,6 +15,7 @@ using Northwind.Core.Services;
 using Northwind.Filters;
 using Northwind.Middleware;
 using Northwind.Models;
+using Northwind.Services;
 
 namespace Northwind
 {
@@ -43,7 +45,9 @@ namespace Northwind
             services.AddScoped<IRepository<Supplier>, SupplierRepository>();
 
             services.AddSingleton<IConfigurationService, ConfigurationService>();
-            
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
+
             Action<MvcOptions> configMvcAction = x => { };
 
             var isLoggingEnabled = Configuration.GetSection("Logging").GetValue<bool>("ActionLoggingEnabled");
