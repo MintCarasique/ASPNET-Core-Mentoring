@@ -30,8 +30,6 @@ namespace Northwind.Areas.Identity
                     options.LogoutPath = $"/Identity/Account/Logout";
                     options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
                 });
-
-                
             });
         }
     }
