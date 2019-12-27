@@ -64,7 +64,6 @@ namespace Northwind
                 configMvcAction = options => options.Filters.Add(typeof(LoggingFilterAttribute));
 
             services.AddMvc(configMvcAction);
-                services.AddRazorOptions(options => options.AllowRecompilingViewsOnFileChange = true);
             services.AddSwaggerDocument();
         }
 
