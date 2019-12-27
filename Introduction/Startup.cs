@@ -41,7 +41,7 @@ namespace Northwind
         {
             var connectionString = Configuration.GetConnectionString("NorthwndConf");
             services.AddDbContext<NorthwindContext>(options => options.UseSqlServer(connectionString));
-            services.AddMvc();
+            services.AddMvc().AddRazorOptions(options => options.AllowRecompilingViewsOnFileChange = true);
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ISupplierService, SupplierService>();
@@ -64,6 +64,7 @@ namespace Northwind
                 configMvcAction = options => options.Filters.Add(typeof(LoggingFilterAttribute));
 
             services.AddMvc(configMvcAction);
+                services.AddRazorOptions(options => options.AllowRecompilingViewsOnFileChange = true);
             services.AddSwaggerDocument();
         }
 
